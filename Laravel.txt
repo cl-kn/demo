@@ -1,0 +1,450 @@
+参考：https://qiita.com/tamakiiii/items/e71040173fa0a1fcad83
+参考：https://teratail.com/questions/319384
+
+ローカル環境構築構築　https://laraweb.net/tutorial/3171/
+①　xampp　https://www.apachefriends.org/jp/index.html
+②　composer　https://getcomposer.org/
+③　
+　xampp/htdocs へ移動
+　omposer create-project --prefer-dist laravel/laravel demo
+
+④もろもろ設定
+言語、日時の設定　xampp/htdocs/demo/config/app.php
+ルートパスの設定　xampp/apache/conf/httpd.conf
+
+最下行に追加
+<VirtualHost dev.laravel.demo:80>
+DocumentRoot "C:/xampp/htdocs/demo/public"
+ServerName dev.laravel.demo
+</VirtualHost>
+
+hostファイルの設定　C:/Windows/System32/drivers/etc/hosts
+
+最終行に下記を追加
+127.0.0.1 dev.laravel.demo
+
+※※xamppを再起動し、ブラウザアクセスを確認※※
+http://dev.laravel.demo
+
+*************************************************************
+「demo」プロジェクト専用のDBを作成
+①　.envファイルの設定　xampp/htdocs/demo/.env
+
+下記項目を編集
+DB_DATABASE=demo_db
+DB_USERNAME=demo_user
+DB_PASSWORD=secret
+
+②　MySQL で DB作成
+xamppのShellより、
+【実行】　mysql -u root
+【実行】　CREATE DATABASE demo_db;
+【実行】　CREATE USER demo_user@localhost IDENTIFIED BY 'secret';
+【実行】　GRANT ALL ON demo_db.* TO demo_user@localhost IDENTIFIED BY 'secret';
+【実行】　MariaDB [(none)]> quit　（設定終わり）
+
+※※デフォのマイグレーションファイルを実行してみる※※
+cd C:\xampp\htdocs\demo
+php artisan migrate
+エラー無しならOK
+
+※※SQLコマンドでテーブルの中身を確認※※
+cd C:\xampp\htdocs\demo
+>>mysql -u demo_user -p demo_db
+>>secret （パスを入力する）
+>>desc users;
+>>quit （DBを抜ける）
+
+*************************************************************
+Laravel Collectiveパッケージのインストール　（Formファザード）
+Composerで、「Laravel Collective」インストール
+【実行】　composer require "laravelcollective/html"
+
+参考：https://laraweb.net/practice/7965/
+参考：http://program-memo.com/archives/653
+
+*************************************************************
+CRUDアプリのビュー（中身空）　を作成
+参考：https://laraweb.net/tutorial/elementary/8110/
+
+親ビュー　resources\views\layouts\master_bootstrap.blade.php
+　ヘッダー　resources\views\layouts\header_bootstrap.blade.php
+　フッター　resources\views\layouts\footer_bootstrap.blade.php　
+
+子のビュー　resources\views\boot_template\index.blade.php
+
+*************************************************************
+CRUDアプリの作成STEP1　https://laraweb.net/tutorial/elementary/8110/
+①　Laravel Mixのインストール　https://laraweb.net/environment/7907/
+npm -v　で、NPMの確認
+ない→インストール
+ある→xampp\htdocs\demo　に移動し、　npm install　実行
+
+②　Bootstrapソース（Sass）を、Laravelに設置
+ダウンロード　https://getbootstrap.com/docs/4.3/getting-started/download/
+resources/sass 直下に bootstrapフォルダ設置し、BootstrapのSassファイル郡を設置
+
+resources/sass/_variables.scss　を編集
+下記を追加
+
+/*====================================
+
+Bootstrap SASSカスタマイズファイル
+
+====================================*/
+
+/*
+Typography
+———————————————*/
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+/*
+Colors
+———————————————*/
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66d9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+
+// Gray for use across Bootstrap.
+$gray-base:              #000 !default;
+$gray-darker:            lighten($gray-base, 13.5%) !default; // #222
+$gray-dark:              lighten($gray-base, 20%) !default;   // #333
+$gray:                   lighten($gray-base, 33.5%) !default; // #555
+$gray-light:             lighten($gray-base, 46.7%) !default; // #777
+$gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
+
+$primary: #f25f70;
+
+/*
+Body
+———————————————*/
+html,
+body {
+    height: 100%;
+}
+
+#page-content {
+    flex: 1 0 auto;
+}
+
+#sticky-footer {
+    flex-shrink: none;
+}
+
+// Background color for ``.
+$body-bg:               #f8fafc !default;
+// Global text color on ``.
+$text-color:            $gray-dark !default;
+
+③　resources/sass/app.scss　を下記の様に編集
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap 本体
+@import 'bootstrap/bootstrap.scss';
+
+④　Sassのコンパイル
+【実行】　npm run dev
+【実行】　npm run watch
+
+⑤　Bladeファイルの修正
+master.bootstrap.blade.php　を下記の通りに修正する
+
+<!--Bootstrap CSS -->
+{{--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">--}}
+<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+*************************************************************
+CRUDアプリの作成STEP２：https://laraweb.net/tutorial/8123/
+
+①　マイグレーションファイルのスケルトンを作成
+php artisan make:migration create_students_table --create=students
+
+demo/database/migrations　に移動し、　create_students_table.php を編集
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+public function up()
+{
+    // Schemaファサードで students テーブルの作成
+    Schema::create('students', function (Blueprint $table) {
+
+        // カラムを作成していく
+        $table->bigIncrements('id');
+        $table->string('name');
+        $table->string('email')->unique();
+        $table->string('tel');
+        $table->string('message');
+        $table->timestamps();
+    });
+}
+public function down()
+{
+    // テーブル削除（ロールバック）
+    Schema::dropIfExists('students');
+}
+
+【実行】　php artisan migrate
+※※phpMyAdminでテーブルの確認をする
+
+②　モデルの作成
+【実行】　php artisan make:model Student
+
+demo/app/Models/Student.php　ファイルを編集
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Student extends Model
+{
+    // use HasFactory;
+    protected $guarded = ['id'];
+}
+
+③　シーダーファイルの作成
+【実行】　php artisan make:seeder StudentsTableSeeder
+
+database\seeds\StudentsTableSeeder.php　ファイルを編集
+
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Faker\Factory as Faker; //追記
+use Illuminate\Support\Facades\DB; //追記
+
+class StudentsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //
+        # リセット
+        DB::table('students')->delete();
+
+        # 日本語設定
+        // $faker = Faker\Factory::create('ja_JP');
+        $faker = Faker::create('ja_JP'); //修正版
+
+        # サンプルデータの挿入
+        for ($i = 0; $i < 10; $i++) {
+            \App\Models\Student::create([
+                'name' => $faker->name(),
+                'email' => $faker->email(),
+                'tel' => $faker->phoneNumber(),
+                'message' => $faker->text()
+            ]);
+        }
+    }
+}
+
+④　シーダーの大元ファイル（DatabaseSeeder.php）　の編集
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        \App\Models\User::factory(10)->create();
+
+        # StudentsTableSeeder を呼び出すよう登録
+        $this->call(StudentsTableSeeder::class);
+    }
+}
+
+⑤　シーダーファイルの実行
+php artisan db:seed
+
+※※DBテーブルを確認しておく
+*************************************************************
+CRUDアプリ　DB一覧表示ページ　https://laraweb.net/tutorial/2791/
+①　ビューの作成　
+demo/resources/views/student　フォルダ内に、　list.blade.php　作成
+
+<!-- 親テンプレート -->
+@extends('layouts.master_bootstrap') {{-- テンプレート（CSSカスタマイズ版）読み込み --}}
+
+@section('title', 'Laravel CRUD APP チュートリアル') {{-- サイトタイトル定義 --}}
+<!-- 親テンプレートに表示させる場所 -->
+@section('content')
+<!-- Page Content -->
+<div id="page-content">
+    <div class="container">
+        <div class="row justify-content-left">
+            <div class="col-md-12">
+                <h1 class="font-weight-light mt-4">Laravel CRUD APP チュートリアル</h1>
+                <p class="lead">
+                    このページは「Laravel CRUD APP」のデモページです。<br>
+                </p>
+
+                <!-- Page Content -->
+                <div class="container mt-5">
+
+                    <!-- 検索フォーム -->
+                    <div class="row" style="padding-bottom: 30px; margin-left: 0px; margin-right: 15px;">
+                        <div class="col-sm-10" style="padding-left:0;">
+                            <form method="get" action="" class="form-inline">
+                                <div class="form-group">
+                                    <input type="text" name="keyword" class="form-control" value="" placeholder="検索キーワード">
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="検索" class="btn btn-info" style="margin-left: 15px; color:white;">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-2" style="padding-left: 0;">
+                            <a href="#" class="btn" style="background-color: #f0ad4e; color: white; width: 100px;"><i class="fas fa-plus"></i> 新規登録</a>
+                        </div>
+                    </div>
+
+                    {{Form::open(['url' => '/', 'files' => true])}}
+                    {{Form::token()}}
+
+                    <!--テーブル-->
+                    <div class="table-responsive">
+                        <table class="table" style="width: 1000px; max-width: 0 auto;">
+                            <tr class="table-info">
+                                <th scope="col" width="10%">#</th>
+                                <th scope="col" width="15%">名前</th>
+                                <th scope="col" width="30%">Email</th>
+                                <th scope="col" width="15%">TEL</th>
+                                <th scope="col" width="30%" colspan="3">OPTION</th>
+                            </tr>
+                            <!-- <tr>
+                                <th scope="row">1</th>
+                                <td>ダミー テスト①</td>
+                                <td>test1@test1.com</td>
+                                <td>080-1111-1111</td>
+                                <td><button type="button" class="btn btn-success">詳細</button></td>
+                                <td><button type="button" class="btn btn-primary">編集</button></td>
+                                <td><button type="button" class="btn btn-danger">削除</button></td>
+                            </tr> -->
+                            <tbody>
+                                @foreach($students as $student)
+                                <tr>
+                                    <td>{{$student->id}}</td>
+                                    <td>{{$student->name}}</td>
+                                    <td>{{$student->email}}</td>
+                                    <td>{{$student->tel}}</td>
+                                    <td>
+                                        <a href="" class="btn btn-primary btn-sm">詳細</a>
+                                        <a href="" class="btn btn-primary btn-sm">編集</a>
+                                        <a href="" class="btn btn-danger btn-sm">削除</a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                    <!--/テーブル-->
+
+                    {{Form::close()}}
+
+                </div><!-- /container -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- / Page Content -->
+@endsection
+
+②　ルーティングの設定　demo/routes/web.php
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+//練習用
+Route::get('/contact', function() {
+    return view('contact');
+});
+
+Route::get('/test', function() {
+    return view('test');
+});
+
+Route::get('/index', function() {
+    return view('boot_template.index');
+});
+
+Route::get('student/list','App\Http\Controllers\StudentController@getIndex');
+
+③　コントローラーの設定
+artisan コマンドでコントローラーのスケルトンを作成
+php artisan make:controller StudentController
+
+④　ページネーション
+demo/app/Http/Controllers/StudentController.php　を編集
+
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Student;
+
+class StudentController extends Controller
+{
+    //
+    public function getIndex()
+    {
+        // $query = Student::query();
+        $query = Student::query();
+        // 全件取得 +ページネーション
+        $students = $query->orderBy('id', 'asc')->paginate(10); //【変更】desc → asc
+        // $students = $query->sortBy();
+        return view('student.list')->with('students', $students);
+    }
+}
+
+
+
+
+
+
