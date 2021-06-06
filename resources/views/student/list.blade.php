@@ -30,7 +30,7 @@
                             </form>
                         </div>
                         <div class="col-sm-2" style="padding-left: 0;">
-                            <a href="#" class="btn" style="background-color: #f0ad4e; color: white; width: 100px;"><i class="fas fa-plus"></i> 新規登録</a>
+                            <a href="{{ url('/student/new_index') }}" class="btn" style="background-color: #f0ad4e; color: white; width: 100px;"><i class="fas fa-plus"></i> 新規登録</a>
                         </div>
                     </div>
 
@@ -47,15 +47,7 @@
                                 <th scope="col" width="15%">TEL</th>
                                 <th scope="col" width="30%" colspan="3">OPTION</th>
                             </tr>
-                            <!-- <tr>
-                                <th scope="row">1</th>
-                                <td>ダミー テスト①</td>
-                                <td>test1@test1.com</td>
-                                <td>080-1111-1111</td>
-                                <td><button type="button" class="btn btn-success">詳細</button></td>
-                                <td><button type="button" class="btn btn-primary">編集</button></td>
-                                <td><button type="button" class="btn btn-danger">削除</button></td>
-                            </tr> -->
+
                             <tbody>
                                 @foreach($students as $student)
                                 <tr>
