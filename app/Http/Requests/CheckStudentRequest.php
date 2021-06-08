@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\PhoneRule;
 
 class CheckStudentRequest extends FormRequest
 {
@@ -31,8 +32,10 @@ class CheckStudentRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email',
+            // 'tel' => 'required|numeric',   //|digits_between:10,11',
+            'tel' => ['required', new PhoneRule()],   //|digits_between:10,11',
+
             // 'email' => ['required','email'],
-            'tel' => 'required|numeric',
             // 'tel' => ['required','numeric'],
             // 'message' => 'required|max:500'
         ];
@@ -42,11 +45,10 @@ class CheckStudentRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => '必須項目です。',//name. 無くても通る
+            'name.required' => '必須項目です。', //name. 無くても通る
             'email.email' => 'メールアドレスの形式で入力して下さい',
-            'tel.numeric' => '数値で入力して下さい。',
+            'tel.phone' => '数値で入力して下さい。',
             // 'message.max' => '500文字以内で入力して下さい。',
         ];
     }
-
 }

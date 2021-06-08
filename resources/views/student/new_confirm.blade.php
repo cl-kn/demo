@@ -17,15 +17,17 @@
                 <!-- Page Content -->
                 <div class="container mt-5">
 
-                    <form action="{{ url('/student/new_finish') }}" method="post" class="form-horizontal">
+                    <form action="{{ url('/student/new_finish') }}" method="get" class="form-horizontal">
                         {{ csrf_field() }}
-                        {{ method_field('post') }}
+                        {{ method_field('get') }}
                         <input type="hidden" name="name" value="{{$name}}">
                         <input type="hidden" name="email" value="{{$email}}">
                         <input type="hidden" name="tel" value="{{$tel}}">
                         <div class="row">
                             <label class="col-sm-4 control-label">お名前</label>
                             <div class="col-sm-8">{{$name}}</div>
+
+
                         </div>
                         <div class="row">
                             <label class="col-sm-4 control-label">メールアドレス</label>

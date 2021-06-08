@@ -37,33 +37,49 @@ Route::get('/index', function () {
 
 // Route::get('/index','PostController@getIndex');
 
-Route::get('student/list', 'App\Http\Controllers\StudentController@getIndex');
-
-//0606追加
-// Route::group(['prefix' => 'student'], function () {
-//     Route::get('student/list', 'App\Http\Controllers\StudentController@getIndex'); //一覧
-//     Route::get('student/new_index', 'App\Http\Controllers\StudentController@new_index'); //入力
-//     Route::patch('student/new_confirm', 'App\Http\Controllers\StudentController@new_confirm'); //確認
-//     Route::post('student/new_finish', 'App\Http\Controllers\StudentController@new_finish'); //完了
+// Route::get('/index',[boot_template::class, 'index']);
+// Route::get('/flat_ui/{name}','ComponentsController@parts');
+// Route::get('/', function () {
+//     return view('contact');
 // });
 
+// Route::get('/posts/{id}', [PostController::class,'show']);
+
+//210604 URL2804 ルーティング設定
+// Route::group(['prefix' => 'student'], function () {
+//     Route::get('list', 'App\Http\Controllers\StudentController@getIndex'); //一覧
+//     Route::get('new', 'App\Http\Controllers\StudentController@new_index'); //入力
+//     Route::patch('new', 'App\Http\Controllers\StudentController@new_confirm'); //確認
+//     Route::post('new', 'App\Http\Controllers\StudentController@new_finish'); //完了
+
+//     Route::get('edit/{id}/', 'App\Http\Controllers\StudentController@edit_index'); //編集
+//     Route::patch('edit/{id}/', 'App\Http\Controllers\StudentController@edit_confirm'); //確認
+//     Route::post('edit/{id}/', 'App\Http\Controllers\StudentController@edit_finish'); //完了
+// });
+
+Route::get('student/list', 'App\Http\Controllers\StudentController@getIndex');
+
+//0607 追記 「新規登録」
 Route::get('student/list', 'App\Http\Controllers\StudentController@getIndex'); //一覧
 Route::get('student/new_index', 'App\Http\Controllers\StudentController@new_index'); //入力
 Route::get('student/new_confirm', 'App\Http\Controllers\StudentController@new_confirm'); //確認
-Route::post('student/new_finish', 'App\Http\Controllers\StudentController@new_finish'); //完了
+Route::get('student/new_finish', 'App\Http\Controllers\StudentController@new_finish'); //完了
 
-//３）ルーティングの設定 より
-//https://laraweb.net/knowledge/2100/
-# 入力画面
-// Route::get('student/list', [
-//     'uses' => 'CheckStudentRequest@getIndex',
-//     'as' => 'student.new_index'
+//0607 追記 「確認（編集）」
+Route::get('student/edit_index', 'App\Http\Controllers\StudentController@edit_index'); //編集
+Route::get('student/edit_confirm', 'App\Http\Controllers\StudentController@edit_confirm'); //確認
+Route::get('student/edit_finish', 'App\Http\Controllers\StudentController@edit_finish'); //完了
+
+// # 入力画面
+// Route::get('/validation', [
+//     'uses' => 'App\Http\Controllers\ValiDemoController@getIndex',
+//     'as' => 'validation.index'
 // ]);
 
-# 確認画面
-// Route::post('student/new_confirm', [
-//     'uses' => 'CheckStudentRequest@confirm',
-//     'as' => 'student.new_confirm'
+// # 確認画面
+// Route::post('/validation/confirm', [
+//     'uses' => 'App\Http\Controllers\ValiDemoController@confirm',
+//     'as' => 'validation.confirm'
 // ]);
 
 Route::resource('tasks', 'App\Http\Controllers\TasksController');
@@ -73,16 +89,3 @@ Route::resource('tasks', 'App\Http\Controllers\TasksController');
 // Route::get('tasks/edit', 'App\Http\Controllers\TasksController@edit');
 // Route::put('tasks/update', 'App\Http\Controllers\TasksController@update');
 // Route::delete('tasks/destroy', 'App\Http\Controllers\TasksController@destroy');
-
-
-// Route::get('/index',[boot_template::class, 'index']);
-// Route::get('/flat_ui/{name}','ComponentsController@parts');
-
-
-
-
-// Route::get('/', function () {
-//     return view('contact');
-// });
-
-// Route::get('/posts/{id}', [PostController::class,'show']);
