@@ -14,12 +14,18 @@
                     このページは「Laravel CRUD APP」のデモページです。<br>
                 </p>
 
+                {{var_dump($name)}}<br>
+                {{var_dump($email)}}<br>
+                {{request()->fullUrl()}}<br>
+
                 <!-- Page Content -->
                 <div class="container mt-5">
 
-                    <form action="{{ url('/student/new_finish') }}" method="get" class="form-horizontal">
+                    {{--<form action="{{ url('/student/edit_finish/11') }}" method="get" class="form-horizontal">--}}
+
+                    <form action="{{ url('/student/edit_finish/' . $id )}}" method="get" class="form-horizontal">
+
                         {{ csrf_field() }}
-                        {{ method_field('get') }}
                         <input type="hidden" name="name" value="{{$name}}">
                         <input type="hidden" name="email" value="{{$email}}">
                         <input type="hidden" name="tel" value="{{$tel}}">

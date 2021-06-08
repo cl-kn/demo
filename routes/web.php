@@ -60,15 +60,16 @@ Route::get('/index', function () {
 Route::get('student/list', 'App\Http\Controllers\StudentController@getIndex');
 
 //0607 追記 「新規登録」
-Route::get('student/list', 'App\Http\Controllers\StudentController@getIndex'); //一覧
+Route::get('student/list', 'App\Http\Controllers\StudentController@getIndex')->name('list'); //一覧
 Route::get('student/new_index', 'App\Http\Controllers\StudentController@new_index'); //入力
 Route::get('student/new_confirm', 'App\Http\Controllers\StudentController@new_confirm'); //確認
 Route::get('student/new_finish', 'App\Http\Controllers\StudentController@new_finish'); //完了
 
 //0607 追記 「確認（編集）」
-Route::get('student/edit_index', 'App\Http\Controllers\StudentController@edit_index'); //編集
-Route::get('student/edit_confirm', 'App\Http\Controllers\StudentController@edit_confirm'); //確認
-Route::get('student/edit_finish', 'App\Http\Controllers\StudentController@edit_finish'); //完了
+Route::get('student/edit_index/{id}', 'App\Http\Controllers\StudentController@edit_index')->name('edit_index'); //編集
+Route::get('student/edit_confirm/{id}', 'App\Http\Controllers\StudentController@edit_confirm')->name('edit_confirm'); //確認
+Route::get('student/edit_finish/{id}', 'App\Http\Controllers\StudentController@edit_finish')->name('edit_finish'); //完了
+// Route::get('student/edit_finish/{id}', 'App\Http\Controllers\StudentController@edit_finish')->name('edit_finish'); //完了
 
 // # 入力画面
 // Route::get('/validation', [

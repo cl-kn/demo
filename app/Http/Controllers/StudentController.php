@@ -44,14 +44,44 @@ class StudentController extends Controller
         $student->name = $request->name;
         $student->email = $request->email;
         $student->tel = $request->tel;
-        // $student->message = $request->message;
-        // $student->updated_at = $request->updated_at;
-        // $student->created_at = $request->created_at;
 
         // 保存
         $student->save();
 
         // 一覧にリダイレクト
+        return redirect()->to('student/list');
+    }
+
+    //0608 追記 「編集」機能用***************************************************
+    public function edit_index($id)
+    {
+        $student = Student::findOrFail($id);
+        return view('student.edit_index')->with('student', $student);
+    }
+
+    public function edit_confirm(CheckStudentRequest $req)
+    {
+        $data = $req->all();
+
+        return view('student.edit_confirm')->with($data);
+    }
+
+    public function edit_finish(Request $request, $id)
+    // public function edit_finish(Request $request)
+    {
+        //レコードを検索
+        $student = Student::findOrFail($id);
+        // $student = new Student;
+        // $student = Student::findOrFail($request->id);
+        //値を代入
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->tel = $request->tel;
+
+        //保存（更新）
+        $student->save();
+
+        //リダイレクト
         return redirect()->to('student/list');
     }
 }

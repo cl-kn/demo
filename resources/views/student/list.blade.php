@@ -57,7 +57,9 @@
                                     <td>{{$student->tel}}</td>
                                     <td>
                                         <a href="" class="btn btn-primary btn-sm">詳細</a>
-                                        <a href="" class="btn btn-primary btn-sm">編集</a>
+                                        <!-- <a href="{{ url('student/edit_index') }}?id={{ $student->id }}" class="btn btn-primary btn-sm">編集</a> -->
+                                        <!-- <a href="{{action('App\Http\Controllers\StudentController@edit_index', $student->id)}}" class="btn btn-primary btn-sm">編集</a> -->
+                                        <a href="edit_index/{{$student->id}}" class="btn btn-primary btn-sm">編集</a>
                                         <a href="" class="btn btn-danger btn-sm">削除</a>
                                     </td>
                                 </tr>
