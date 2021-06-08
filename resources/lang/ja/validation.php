@@ -135,6 +135,11 @@ return [
             'ルール名' => 'カスタムメッセージ',
         ],
 
+    // 'custom' => [
+    //     'email' => [
+    //         'required' => ':attribute ',
+    //     ],
+
     ],
 
     /*
@@ -151,6 +156,8 @@ return [
     'attributes' => [
         'phone' => '電話番号',
         'zipcode' => '郵便番号',
+        'email' => '「メールアドレス」',
+        'tel' => '「電話番号」',
     ],
 
 ];

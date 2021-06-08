@@ -46,7 +46,7 @@ class CheckStudentRequest extends FormRequest
     {
         return [
             'name.required' => '必須項目です。', //name. 無くても通る
-            'email.email' => 'メールアドレスの形式で入力して下さい',
+            'email.required' => 'メールアドレスの形式で入力して下さい',
             'tel.phone' => '数値で入力して下さい。',
             // 'message.max' => '500文字以内で入力して下さい。',
         ];
