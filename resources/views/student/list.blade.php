@@ -62,8 +62,6 @@
                                         <!-- <a href="{{action('App\Http\Controllers\StudentController@edit_index', $student->id)}}" class="btn btn-primary btn-sm">編集</a> -->
                                         <a href="edit_index/{{$student->id}}" class="btn btn-primary btn-sm">編集</a>
                                         <!-- <a href="" class="btn btn-danger btn-sm">削除</a> -->
-
-
                                     </td>
                                     <td>
                                         <form action="delete/{{$student->id}}" method="POST">
@@ -79,6 +77,7 @@
                     <!--/テーブル-->
 
                     {{Form::close()}}
+
                     {{-- {!! $students->render() !!}--}}
                     {!! $students->appends(['keyword'=>$keyword])->render() !!}
                 </div><!-- /container -->
