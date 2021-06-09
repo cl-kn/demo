@@ -31,7 +31,7 @@ class CheckStudentRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:students,email',
             // 'tel' => 'required|numeric',   //|digits_between:10,11',
             'tel' => ['required', new PhoneRule()],   //|digits_between:10,11',
 
@@ -49,6 +49,8 @@ class CheckStudentRequest extends FormRequest
             'email.required' => 'メールアドレスの形式で入力して下さい',
             'tel.phone' => '数値で入力して下さい。',
             // 'message.max' => '500文字以内で入力して下さい。',
+
+            'email.unique' => 'そのメールアドレスは既に登録されています。',
         ];
     }
 }
