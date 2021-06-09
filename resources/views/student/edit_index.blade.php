@@ -20,13 +20,9 @@
                     <form action="{{ url('/student/edit_confirm', $student->id)}}" method="get" class="form-horizontal">
                         {{ csrf_field() }}
                         {{ method_field('get') }}
-                        <div class="form-group @if($errors->has('name')) has-error @endif">
-                            <label for="name" class="col-md-3 control-label">ID</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" id="id" name="id" value="{{$student->id}}">
-                                @if($errors->has('name'))<span class="text-danger">{{ $errors->first('name') }}</span> @endif
-                            </div>
-                        </div>
+
+                        <!-- 下記コードで、 $student->id を受け取る -->
+                        <input type="hidden" name="id" value="{{$student->id}}">
 
                         <div class="form-group @if($errors->has('name')) has-error @endif">
                             <label for="name" class="col-md-3 control-label">お名前</label>
