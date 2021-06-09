@@ -18,6 +18,9 @@ class StudentController extends Controller
         //クエリ生成
         $query = Student::query();
 
+        //0609 件数確認用
+        // $count = Student::count();
+
         //キーワードがあったら
         if (!empty($keyword)) {
             $query->where('email', 'like', '%' . $keyword . '%');
@@ -25,9 +28,18 @@ class StudentController extends Controller
             $query->orWhere('tel', 'like', '%' . $keyword . '%');
         }
 
+        // $exists = $query->exists();
+        $sum = $query->count();
+
+        if ($sum == 0) {
+            $msg = "０件ヒットしました。";
+        }else {
+            $msg = $sum."件ヒットしました";
+        }
+
         //ページネーション
         $students = $query->orderBy('id', 'asc')->paginate(10);
-        return view('student.list')->with('students', $students)->with('keyword', $keyword);
+        return view('student.list')->with('students', $students)->with('keyword', $keyword)->with('msg',$msg);
 
         // 全件取得 +ページネーション
         // $students = $query->orderBy('id', 'asc')->paginate(20); //【変更】desc → asc
@@ -122,5 +134,12 @@ class StudentController extends Controller
         //リダイレクト
         //0609 追記「フラッシュメッセージ」機能用
         return redirect()->to('student/list')->with('flashmessage', '削除が完了しました。');
+    }
+
+    //0609 追記 「詳細」機能用***************************************************
+    public function detail_index($id)
+    {
+        $student = Student::findOrFail($id);
+        return view('student.detail_index')->with('student', $student);
     }
 }

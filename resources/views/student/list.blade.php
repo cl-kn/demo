@@ -27,8 +27,13 @@
                                     <input type="text" name="keyword" class="form-control" value="{{$keyword}}" placeholder="検索キーワード">
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" value="検索" class="btn btn-info" style="margin-left: 15px; color:white;">
+                                    <input type="submit" name="search" value="検索" class="btn btn-info" style="margin-left: 15px; color:white;">
                                 </div>
+
+                                @if(isset($_GET['search']) && isset($keyword))
+                                {{$msg}}
+                                @endif
+
                             </form>
                         </div>
                         <div class="col-sm-2" style="padding-left: 0;">
@@ -58,7 +63,7 @@
                                     <td>{{$student->email}}</td>
                                     <td>{{$student->tel}}</td>
                                     <td>
-                                        <!-- <a href="" class="btn btn-primary btn-sm">詳細</a> -->
+                                        <a href="detail_index/{{$student->id}}" class="btn btn-primary btn-sm">詳細</a>
                                         <!-- <a href="{{ url('student/edit_index') }}?id={{ $student->id }}" class="btn btn-primary btn-sm">編集</a> -->
                                         <!-- <a href="{{action('App\Http\Controllers\StudentController@edit_index', $student->id)}}" class="btn btn-primary btn-sm">編集</a> -->
                                         <a href="edit_index/{{$student->id}}" class="btn btn-primary btn-sm">編集</a>
@@ -110,17 +115,17 @@
 
 <!-- session確認用 -->
 <!-- {{ session('flashmessage') }} -->
-<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> -->
 
 <script>
-    // $(window).on('load', function() {
+    $(window).on('load', function() {
+        $('#modal_box').modal("show");
+    });
+
+    // $(window).load(function() {
     //     $('#modal_box').modal("show");
     // });
-
-    $(window).load(function() {
-        $('#modal_box').modal('show');
-    });
 
     // $(document).ready(function() {
     //     $('#modal_box').modal();
