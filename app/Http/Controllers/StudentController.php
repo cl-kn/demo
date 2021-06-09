@@ -84,4 +84,15 @@ class StudentController extends Controller
         //リダイレクト
         return redirect()->to('student/list');
     }
+
+    //0609 追記 「削除」機能用***************************************************
+    public function us_delete($id)
+    {
+        //削除対象レコードを検索
+        $user = Student::find($id);
+        //削除
+        $user->delete();
+        //リダイレクト
+        return redirect()->to('student/list');
+    }
 }

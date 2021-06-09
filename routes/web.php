@@ -69,19 +69,9 @@ Route::get('student/new_finish', 'App\Http\Controllers\StudentController@new_fin
 Route::get('student/edit_index/{id}', 'App\Http\Controllers\StudentController@edit_index')->name('edit_index'); //編集
 Route::get('student/edit_confirm/{id}', 'App\Http\Controllers\StudentController@edit_confirm')->name('edit_confirm'); //確認
 Route::get('student/edit_finish/{id}', 'App\Http\Controllers\StudentController@edit_finish')->name('edit_finish'); //完了
-// Route::get('student/edit_finish/{id}', 'App\Http\Controllers\StudentController@edit_finish')->name('edit_finish'); //完了
 
-// # 入力画面
-// Route::get('/validation', [
-//     'uses' => 'App\Http\Controllers\ValiDemoController@getIndex',
-//     'as' => 'validation.index'
-// ]);
-
-// # 確認画面
-// Route::post('/validation/confirm', [
-//     'uses' => 'App\Http\Controllers\ValiDemoController@confirm',
-//     'as' => 'validation.confirm'
-// ]);
+//0609 追記 「削除」
+Route::post('student/delete/{id}/', 'App\Http\Controllers\StudentController@us_delete');
 
 Route::resource('tasks', 'App\Http\Controllers\TasksController');
 // Route::get('tasks/show', 'App\Http\Controllers\TasksController@show');

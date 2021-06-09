@@ -41,8 +41,8 @@
                     <div class="table-responsive">
                         <table class="table" style="width: 1000px; max-width: 0 auto;">
                             <tr class="table-info">
-                                <th scope="col" width="10%">#</th>
-                                <th scope="col" width="15%">名前</th>
+                                <th scope="col" width="10%">Id</th>
+                                <th scope="col" width="15%">Name</th>
                                 <th scope="col" width="30%">Email</th>
                                 <th scope="col" width="15%">TEL</th>
                                 <th scope="col" width="30%" colspan="3">OPTION</th>
@@ -56,11 +56,19 @@
                                     <td>{{$student->email}}</td>
                                     <td>{{$student->tel}}</td>
                                     <td>
-                                        <a href="" class="btn btn-primary btn-sm">詳細</a>
+                                        <!-- <a href="" class="btn btn-primary btn-sm">詳細</a> -->
                                         <!-- <a href="{{ url('student/edit_index') }}?id={{ $student->id }}" class="btn btn-primary btn-sm">編集</a> -->
                                         <!-- <a href="{{action('App\Http\Controllers\StudentController@edit_index', $student->id)}}" class="btn btn-primary btn-sm">編集</a> -->
                                         <a href="edit_index/{{$student->id}}" class="btn btn-primary btn-sm">編集</a>
-                                        <a href="" class="btn btn-danger btn-sm">削除</a>
+                                        <!-- <a href="" class="btn btn-danger btn-sm">削除</a> -->
+
+
+                                    </td>
+                                    <td>
+                                        <form action="delete/{{$student->id}}" method="POST">
+                                            {{ csrf_field() }}
+                                            <input type="submit" value="削除" class="btn btn-danger btn-sm btn-dell">
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -79,4 +87,19 @@
     </div>
 </div>
 <!-- / Page Content -->
+@endsection
+
+@section('script')
+<script>
+    $(function() {
+        $(".btn-dell").click(function() {
+            if (confirm("本当に削除しますか？")) {
+                //そのままsubmit（削除）
+            } else {
+                //cancel
+                return false;
+            }
+        });
+    });
+</script>
 @endsection
