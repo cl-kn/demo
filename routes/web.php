@@ -73,6 +73,9 @@ Route::get('student/edit_finish/{id}', 'App\Http\Controllers\StudentController@e
 //0609 追記 「削除」
 Route::post('student/delete/{id}/', 'App\Http\Controllers\StudentController@us_delete');
 
+//0609 追記「詳細」
+Route::get('student/detail_index/{id}', 'App\Http\Controllers\StudentController@detail_index');
+
 Route::resource('tasks', 'App\Http\Controllers\TasksController');
 // Route::get('tasks/show', 'App\Http\Controllers\TasksController@show');
 // Route::get('tasks/index', 'App\Http\Controllers\TasksController@index');
