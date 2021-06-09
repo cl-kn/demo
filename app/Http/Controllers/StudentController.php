@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Http\Requests\CheckStudentRequest;
+use App\Http\Controllers\Session;
 
 class StudentController extends Controller
 {
@@ -50,7 +51,8 @@ class StudentController extends Controller
     //完了
     //21.06.06
     //[Requestクラス → CheckStudentRequestクラス]に変更
-    public function new_finish(CheckStudentRequest $request)
+    //21.0609 「フラッシュメッセージ」Requestクラスに変更？
+    public function new_finish(Request $request)
     {
         // Studentオブジェクト生成
         $student = new Student;
@@ -64,7 +66,15 @@ class StudentController extends Controller
         $student->save();
 
         // 一覧にリダイレクト
-        return redirect()->to('student/list');
+        //0609 追記「フラッシュメッセージ」機能用
+        return redirect()->to('student/list')->with('flashmessage', '新規登録が完了しました！');
+
+        // session()->flash('flashmessage', '登録が完了しました！');
+        // return redirect()->to('student/list');
+
+        // session()->flash('message', '新規投稿に成功しました。');
+        // $request->session()->flash('flashmessage', '登録が完了しました！');
+        // return redirect()->to('student/list');
     }
 
     //0608 追記 「編集」機能用***************************************************
@@ -97,7 +107,9 @@ class StudentController extends Controller
         $student->save();
 
         //リダイレクト
-        return redirect()->to('student/list');
+        //0609 追記「フラッシュメッセージ」機能用
+        return redirect()->to('student/list')->with('flashmessage', '編集が完了しました。');
+        // return redirect('student/list')->with('flashmessage', '登録が完了しました！');
     }
 
     //0609 追記 「削除」機能用***************************************************
@@ -108,6 +120,7 @@ class StudentController extends Controller
         //削除
         $user->delete();
         //リダイレクト
-        return redirect()->to('student/list');
+        //0609 追記「フラッシュメッセージ」機能用
+        return redirect()->to('student/list')->with('flashmessage', '削除が完了しました。');
     }
 }

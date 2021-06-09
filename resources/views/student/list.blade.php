@@ -4,6 +4,7 @@
 @section('title', 'Laravel CRUD APP チュートリアル') {{-- サイトタイトル定義 --}}
 <!-- 親テンプレートに表示させる場所 -->
 @section('content')
+
 <!-- Page Content -->
 <div id="page-content">
     <div class="container">
@@ -80,6 +81,8 @@
 
                     {{-- {!! $students->render() !!}--}}
                     {!! $students->appends(['keyword'=>$keyword])->render() !!}
+
+
                 </div><!-- /container -->
             </div>
         </div>
@@ -102,3 +105,60 @@
     });
 </script>
 @endsection
+
+@if(Session::has('flashmessage'))
+
+<!-- session確認用 -->
+<!-- {{ session('flashmessage') }} -->
+<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+<script>
+    // $(window).on('load', function() {
+    //     $('#modal_box').modal("show");
+    // });
+
+    $(window).load(function() {
+        $('#modal_box').modal('show');
+    });
+
+    // $(document).ready(function() {
+    //     $('#modal_box').modal();
+    // });
+
+    // window.onload = function() {
+    //     $('#modal_box').modal('show');
+    // };
+
+    // $(function() {
+    //     $(window).on('load', function() {
+    //         $('#modal_box').modal('show');
+    //     });
+    // });
+
+    //動作確認済み
+    // window.onload = function() {
+    //     alert("ページが読み込まれました！");
+    // };
+</script>
+<!-- モーダルウィンドウの中身 -->
+<div class="modal" id="modal_box" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Laravel CRUD APP チュートリアル</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{ session('flashmessage') }}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@endif
