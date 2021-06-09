@@ -9,14 +9,29 @@ use App\Http\Requests\CheckStudentRequest;
 class StudentController extends Controller
 {
     //コントローラー
-    public function getIndex()
+    //0609 「検索」ように改修
+    public function getIndex(Request $rq)
     {
-        // $query = Student::query();
+        //キーワード受け取り
+        $keyword = $rq->input('keyword');
+        //クエリ生成
         $query = Student::query();
+
+        //キーワードがあったら
+        if (!empty($keyword)) {
+            $query->where('email', 'like', '%' . $keyword . '%');
+            $query->orWhere('name', 'like', '%' . $keyword . '%');
+            $query->orWhere('tel', 'like', '%' . $keyword . '%');
+        }
+
+        //ページネーション
+        $students = $query->orderBy('id', 'asc')->paginate(10);
+        return view('student.list')->with('students', $students)->with('keyword', $keyword);
+
         // 全件取得 +ページネーション
-        $students = $query->orderBy('id', 'asc')->paginate(20); //【変更】desc → asc
+        // $students = $query->orderBy('id', 'asc')->paginate(20); //【変更】desc → asc
         // $students = $query->sortBy();
-        return view('student.list')->with('students', $students);
+        // return view('student.list')->with('students', $students);
     }
 
     //入力

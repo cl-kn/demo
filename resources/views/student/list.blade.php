@@ -21,8 +21,9 @@
                     <div class="row" style="padding-bottom: 30px; margin-left: 0px; margin-right: 15px;">
                         <div class="col-sm-10" style="padding-left:0;">
                             <form method="get" action="" class="form-inline">
+                                {{Form::token()}}
                                 <div class="form-group">
-                                    <input type="text" name="keyword" class="form-control" value="" placeholder="検索キーワード">
+                                    <input type="text" name="keyword" class="form-control" value="{{$keyword}}" placeholder="検索キーワード">
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" value="検索" class="btn btn-info" style="margin-left: 15px; color:white;">
@@ -73,14 +74,13 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-
-
                         </table>
                     </div>
                     <!--/テーブル-->
 
                     {{Form::close()}}
-
+                    {{-- {!! $students->render() !!}--}}
+                    {!! $students->appends(['keyword'=>$keyword])->render() !!}
                 </div><!-- /container -->
             </div>
         </div>
