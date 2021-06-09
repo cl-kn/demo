@@ -32,9 +32,9 @@ class StudentController extends Controller
         $sum = $query->count();
 
         if ($sum == 0) {
-            $msg = "０件ヒットしました。";
+            $msg = "該当データはありませんでした。";
         }else {
-            $msg = $sum."件ヒットしました";
+            $msg = $sum."件ヒットしました。";
         }
 
         //ページネーション
