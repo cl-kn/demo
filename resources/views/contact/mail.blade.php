@@ -1,4 +1,4 @@
-{{$contact["last_name"]}} {{$contact["first_name"]}}さん
+【{{$contact["last_name"]}} {{$contact["first_name"]}}】 様
 
 お問い合わせありがとうございます。
 送信された内容は以下になります。

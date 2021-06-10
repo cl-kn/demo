@@ -8,6 +8,8 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
 //Mailableクラス
+//Mailファサードの補佐役
+//メール本文を指定可能
 class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
@@ -22,7 +24,7 @@ class ContactMail extends Mailable
 
     public function __construct($contact)
     {
-        // 引数で受け取ったデータを疑似変数にセット
+        // 引数で受け取ったデータ（メール本文中で表示したいデータ）を疑似変数にセット
         // クラス定義内部であればアクセスできる
         $this->contact = $contact;
     }

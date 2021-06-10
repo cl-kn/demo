@@ -37,7 +37,7 @@ class ContactController extends Controller
     }
 
     /**
-     * 完了画面
+     * 完了画面（メール送信設定）
      */
     public function finish(Request $request)
     {
@@ -45,8 +45,9 @@ class ContactController extends Controller
         // 配列として受け取りたい場合は $contact = $request->all();
         $contact = $request;
 
-        // 引数にリクエストデータを渡す
+        // 引数にリクエストデータ（ContactMail.php から）を渡す
         // Mailファサードを使ってメールを送信
+        //参考「Mailableクラスを使用する場合はsendメソッドでMailableクラスのインスタンスを渡す。その場合引数は１つとなる。」
         Mail::to($contact->email)->send(new ContactMail($contact));
 
         // Bladeで使う変数
