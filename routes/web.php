@@ -88,6 +88,12 @@ Route::post('teacher/delete/{id}/', 'App\Http\Controllers\TeacherController@us_d
 Route::get('teacher/detail_index/{id}', 'App\Http\Controllers\TeacherController@detail_index');
 // *******************************************************************************************************
 
+//210610 「メールフォーム」用画面**************************************************************************
+Route::get('contact/input', 'App\Http\Controllers\ContactController@input');
+Route::get('contact/confirm', 'App\Http\Controllers\ContactController@confirm');
+Route::get('contact/finish', 'App\Http\Controllers\ContactController@finish');
+
+// *******************************************************************************************************
 
 Route::resource('tasks', 'App\Http\Controllers\TasksController');
 // Route::get('tasks/show', 'App\Http\Controllers\TasksController@show');

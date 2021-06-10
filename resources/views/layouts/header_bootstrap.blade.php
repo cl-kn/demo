@@ -21,7 +21,7 @@
                     <a class="nav-link" href="{{ url('/teacher/list') }}">教師一覧</a>
                 </li>
                 <li class="nav-item">
-                    <!-- <a class="nav-link" href="#">Contact</a> -->
+                    <a class="nav-link" href="{{ url('/contact/input') }}">お問い合わせ</a>
                 </li>
             </ul>
         </div>
