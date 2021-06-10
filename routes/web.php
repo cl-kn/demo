@@ -84,6 +84,7 @@ Route::get('teacher/new_finish', 'App\Http\Controllers\TeacherController@new_fin
 Route::get('teacher/edit_index/{id}', 'App\Http\Controllers\TeacherController@edit_index')->name('edit_index'); //編集
 Route::get('teacher/edit_confirm/{id}', 'App\Http\Controllers\TeacherController@edit_confirm')->name('edit_confirm'); //確認
 Route::get('teacher/edit_finish/{id}', 'App\Http\Controllers\TeacherController@edit_finish')->name('edit_finish'); //完了
+Route::post('teacher/delete/{id}/', 'App\Http\Controllers\TeacherController@us_delete');
 Route::get('teacher/detail_index/{id}', 'App\Http\Controllers\TeacherController@detail_index');
 // *******************************************************************************************************
 

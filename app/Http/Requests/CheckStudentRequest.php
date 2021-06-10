@@ -31,7 +31,7 @@ class CheckStudentRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required|email|unique:students,email',
+            'email' => 'required|email|unique:students,email|unique:teachers,email',
             // 'tel' => 'required|numeric',   //|digits_between:10,11',
             'tel' => ['required', new PhoneRule()],   //|digits_between:10,11',
 
