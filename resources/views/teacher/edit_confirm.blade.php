@@ -11,7 +11,7 @@
             <div class="col-md-12">
                 <h1 class="font-weight-light mt-4">Laravel CRUD APP チュートリアル</h1>
                 <p class="lead">
-                    このページは「生徒編集画面」のデモページです。<br>
+                    このページは「教師編集画面」のデモページです。<br>
                 </p>
                 {{--
                 {{var_dump($name)}}<br>
@@ -21,7 +21,7 @@
                 <!-- Page Content -->
                 <div class="container mt-5">
 
-                    <form action="{{ url('/student/edit_finish/' . $id )}}" method="get" class="form-horizontal">
+                    <form action="{{ url('/teacher/edit_finish/' . $id )}}" method="get" class="form-horizontal">
 
                         {{ csrf_field() }}
                         <input type="hidden" name="name" value="{{$name}}">

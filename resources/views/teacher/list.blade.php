@@ -12,7 +12,7 @@
             <div class="col-md-12">
                 <h1 class="font-weight-light mt-4">Laravel CRUD APP チュートリアル</h1>
                 <p class="lead">
-                    このページは「生徒一覧画面」のデモページです。<br>
+                    このページは「教師一覧画面」のデモページです。<br>
                 </p>
 
                 <!-- Page Content -->
@@ -37,7 +37,7 @@
                             </form>
                         </div>
                         <div class="col-sm-2" style="padding-left: 0;">
-                            <a href="{{ url('/student/new_index') }}" class="btn" style="background-color: #f0ad4e; color: white; width: 100px;"><i class="fas fa-plus"></i> 新規登録</a>
+                            <a href="{{ url('/teacher/new_index') }}" class="btn" style="background-color: #f0ad4e; color: white; width: 100px;"><i class="fas fa-plus"></i> 新規登録</a>
                         </div>
                     </div>
 
@@ -56,21 +56,21 @@
                             </tr>
 
                             <tbody>
-                                @foreach($students as $student)
+                                @foreach($teachers as $teacher)
                                 <tr>
-                                    <td>{{$student->id}}</td>
-                                    <td>{{$student->name}}</td>
-                                    <td>{{$student->email}}</td>
-                                    <td>{{$student->tel}}</td>
+                                    <td>{{$teacher->id}}</td>
+                                    <td>{{$teacher->name}}</td>
+                                    <td>{{$teacher->email}}</td>
+                                    <td>{{$teacher->tel}}</td>
                                     <td>
-                                        <a href="detail_index/{{$student->id}}" class="btn btn-primary btn-sm">詳細</a>
-                                        <!-- <a href="{{ url('student/edit_index') }}?id={{ $student->id }}" class="btn btn-primary btn-sm">編集</a> -->
-                                        <!-- <a href="{{action('App\Http\Controllers\StudentController@edit_index', $student->id)}}" class="btn btn-primary btn-sm">編集</a> -->
-                                        <a href="edit_index/{{$student->id}}" class="btn btn-primary btn-sm">編集</a>
+                                        <a href="detail_index/{{$teacher->id}}" class="btn btn-primary btn-sm">詳細</a>
+                                        <!-- <a href="{{ url('teacher/edit_index') }}?id={{ $teacher->id }}" class="btn btn-primary btn-sm">編集</a> -->
+                                        <!-- <a href="{{action('App\Http\Controllers\StudentController@edit_index', $teacher->id)}}" class="btn btn-primary btn-sm">編集</a> -->
+                                        <a href="edit_index/{{$teacher->id}}" class="btn btn-primary btn-sm">編集</a>
                                         <!-- <a href="" class="btn btn-danger btn-sm">削除</a> -->
                                     </td>
                                     <td>
-                                        <form action="delete/{{$student->id}}" method="POST">
+                                        <form action="delete/{{$teacher->id}}" method="POST">
                                             {{ csrf_field() }}
                                             <input type="submit" value="削除" class="btn btn-danger btn-sm btn-dell">
                                         </form>
@@ -84,8 +84,8 @@
 
                     {{Form::close()}}
 
-                    {{-- {!! $students->render() !!}--}}
-                    {!! $students->appends(['keyword'=>$keyword])->render() !!}
+                    {{-- {!! $teachers->render() !!}--}}
+                    {!! $teachers->appends(['keyword'=>$keyword])->render() !!}
 
 
                 </div><!-- /container -->

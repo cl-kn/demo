@@ -11,7 +11,7 @@
             <div class="col-md-12">
                 <h1 class="font-weight-light mt-4">Laravel CRUD APP チュートリアル</h1>
                 <p class="lead">
-                    このページは「Laravel CRUD APP」のデモページです。<br>
+                    このページは「生徒登録画面」のデモページです。<br>
                 </p>
 
                 <!-- Page Content -->

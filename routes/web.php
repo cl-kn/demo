@@ -57,7 +57,7 @@ Route::get('/index', function () {
 //     Route::post('edit/{id}/', 'App\Http\Controllers\StudentController@edit_finish'); //完了
 // });
 
-Route::get('student/list', 'App\Http\Controllers\StudentController@getIndex');
+Route::get('/top', 'App\Http\Controllers\TopController@get_Top');
 
 //0607 追記 「新規登録」
 Route::get('student/list', 'App\Http\Controllers\StudentController@getIndex')->name('list'); //一覧
@@ -75,6 +75,18 @@ Route::post('student/delete/{id}/', 'App\Http\Controllers\StudentController@us_d
 
 //0609 追記「詳細」
 Route::get('student/detail_index/{id}', 'App\Http\Controllers\StudentController@detail_index');
+
+//210610 「教師」用画面**************************************************************************
+Route::get('teacher/list', 'App\Http\Controllers\TeacherController@getIndex')->name('list'); //一覧
+Route::get('teacher/new_index', 'App\Http\Controllers\TeacherController@new_index'); //入力
+Route::get('teacher/new_confirm', 'App\Http\Controllers\TeacherController@new_confirm'); //確認
+Route::get('teacher/new_finish', 'App\Http\Controllers\TeacherController@new_finish'); //完了
+Route::get('teacher/edit_index/{id}', 'App\Http\Controllers\TeacherController@edit_index')->name('edit_index'); //編集
+Route::get('teacher/edit_confirm/{id}', 'App\Http\Controllers\TeacherController@edit_confirm')->name('edit_confirm'); //確認
+Route::get('teacher/edit_finish/{id}', 'App\Http\Controllers\TeacherController@edit_finish')->name('edit_finish'); //完了
+Route::get('teacher/detail_index/{id}', 'App\Http\Controllers\TeacherController@detail_index');
+// *******************************************************************************************************
+
 
 Route::resource('tasks', 'App\Http\Controllers\TasksController');
 // Route::get('tasks/show', 'App\Http\Controllers\TasksController@show');

@@ -11,46 +11,46 @@
             <div class="col-md-12">
                 <h1 class="font-weight-light mt-4">Laravel CRUD APP チュートリアル</h1>
                 <p class="lead">
-                    このページは「生徒詳細画面」のデモページです。<br>
+                    このページは「教師詳細画面」のデモページです。<br>
                 </p>
                 <!-- Page Content -->
                 <div class="container mt-5">
                     <div class="form-group @if($errors->has('name')) has-error @endif">
                         <label for="id" class="col-md-3 control-label">ID</label>
                         <div class="col-sm-9">
-                            <label for="id" class="col-md-3 control-label">{{$student->id}}</label>
+                            <label for="id" class="col-md-3 control-label">{{$teacher->id}}</label>
                         </div>
                     </div>
                     <div class="form-group @if($errors->has('name')) has-error @endif">
                         <label for="name" class="col-md-3 control-label">お名前</label>
                         <div class="col-sm-9">
-                            <label for="name" class="col-md-3 control-label">{{$student->name}}</label>
+                            <label for="name" class="col-md-3 control-label">{{$teacher->name}}</label>
                         </div>
                     </div>
                     <div class="form-group @if($errors->has('name')) has-error @endif">
                         <label for="email" class="col-md-3 control-label">メールアドレス</label>
                         <div class="col-sm-9">
-                            <label for="email" class="col-md-3 control-label">{{$student->email}}</label>
+                            <label for="email" class="col-md-3 control-label">{{$teacher->email}}</label>
                         </div>
                     </div>
                     <div class="form-group @if($errors->has('name')) has-error @endif">
                         <label for="tell" class="col-md-3 control-label">電話番号</label>
                         <div class="col-sm-9">
-                            <label for="tell" class="col-md-3 control-label">{{$student->tel}}</label>
+                            <label for="tell" class="col-md-3 control-label">{{$teacher->tel}}</label>
                         </div>
                     </div>
 
                     <div class="form-group @if($errors->has('name')) has-error @endif">
                         <label for="tell" class="col-md-3 control-label">登録日</label>
                         <div class="col-sm-9">
-                            <label for="tell" class="col-md-3 control-label">{{$student->created_at}}</label>
+                            <label for="tell" class="col-md-3 control-label">{{$teacher->created_at}}</label>
                         </div>
                     </div>
 
                     <div class="form-group @if($errors->has('name')) has-error @endif">
                         <label for="tell" class="col-md-3 control-label">更新日</label>
                         <div class="col-sm-9">
-                            <label for="tell" class="col-md-3 control-label">{{$student->updated_at}}</label>
+                            <label for="tell" class="col-md-3 control-label">{{$teacher->updated_at}}</label>
                         </div>
                     </div>
 
