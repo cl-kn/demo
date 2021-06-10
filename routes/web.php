@@ -31,9 +31,9 @@ Route::get('/test', function () {
 //     return view('boot_template.index');
 // });
 
-Route::get('/index', function () {
-    return view('boot_template.index');
-});
+// Route::get('/index', function () {
+//     return view('boot_template.index');
+// });
 
 // Route::get('/index','PostController@getIndex');
 
