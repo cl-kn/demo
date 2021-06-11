@@ -130,15 +130,18 @@ return [
     |
     */
 
-    'custom' => [
-        '属性名' => [
-            'ルール名' => 'カスタムメッセージ',
-        ],
-
     // 'custom' => [
-    //     'email' => [
-    //         'required' => ':attribute ',
+    //     '属性名' => [
+    //         'ルール名' => 'カスタムメッセージ',
     //     ],
+
+    'custom' => [
+        'email' => [
+            'unique' => ':attribute は既に登録されているため、違うものを入力して下さい。',
+        ],
+        'password' => [
+            'string' => ':attributeは:value文字以上で指定してください。',
+        ],
 
     ],
 
@@ -156,8 +159,9 @@ return [
     'attributes' => [
         'phone' => '電話番号',
         'zipcode' => '郵便番号',
-        'email' => '「メールアドレス」',
-        'tel' => '「電話番号」',
+        'email' => 'メールアドレス',
+        'tel' => '電話番号',
+        'password' => 'パスワード',
     ],
 
 ];

@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin', function () {
+    return view('admin');
+});
+
 //練習用
 Route::get('/contact', function () {
     return view('contact');
@@ -102,3 +106,7 @@ Route::resource('tasks', 'App\Http\Controllers\TasksController');
 // Route::get('tasks/edit', 'App\Http\Controllers\TasksController@edit');
 // Route::put('tasks/update', 'App\Http\Controllers\TasksController@update');
 // Route::delete('tasks/destroy', 'App\Http\Controllers\TasksController@destroy');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
