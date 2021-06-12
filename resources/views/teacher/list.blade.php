@@ -72,7 +72,8 @@
                                     <td>
                                         <form action="delete/{{$teacher->id}}" method="POST">
                                             {{ csrf_field() }}
-                                            <input type="submit" value="削除" class="btn btn-danger btn-sm btn-dell">
+                                            <!-- <input type="submit" value="削除" class="btn btn-danger btn-sm btn-dell"> -->
+                                            <button type="submit" class="btn btn-danger btn-sm btn-dell">削除</button>
                                         </form>
                                     </td>
                                 </tr>
